@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scratch Page - [Your Topic]</title>
+    <link rel="stylesheet" href="scratch-page-styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <h2 class="logo">My Topic</h2>
+            <ul class="nav-links">
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#gallery" class="nav-link">Gallery</a></li>
+                <li><a href="#resources" class="nav-link">Resources</a></li>
+                <li><a href="../index.html" class="nav-link back-link">← Back to Portfolio</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Welcome to My [Topic] Page</h1>
+            <p class="tagline">Explore [your topic] and discover what fascinates me</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- About Section -->
+        <section id="about" class="section">
+            <div class="section-content">
+                <h2>About [Your Topic]</h2>
+                <p>
+                    Write an engaging introduction to your topic. Explain why you're passionate about this subject 
+                    and what makes it interesting to you. Share your personal connection to this hobby or passion.
+                </p>
+        
+                <!-- Nested Lists Example -->
+                <div class="lists-container">
+                    <h3>Why I Love [Your Topic]</h3>
+                    <ol class="outer-list">
+                        <li>
+                            First major reason
+                            <ul class="inner-list">
+                                <li>Sub reason 1a</li>
+                                <li>Sub reason 1b</li>
+                                <li>Sub reason 1c</li>
+                            </ul>
+                        </li>
+                        <li>
+                            Second major reason
+                            <ul class="inner-list">
+                                <li>Sub reason 2a</li>
+                                <li>Sub reason 2b</li>
+                            </ul>
+                        </li>
+                        <li>
+                            Third major reason
+                            <ul class="inner-list">
+                                <li>Sub reason 3a</li>
+                                <li>Sub reason 3b</li>
+                                <li>Sub reason 3c</li>
+                                <li>Sub reason 3d</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Section with Images -->
+        <section id="gallery" class="section gallery-section">
+            <h2>Image Gallery</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="https://via.placeholder.com/300x250" alt="Gallery image 1">
+                    <p>Image Caption 1</p>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://via.placeholder.com/300x250" alt="Gallery image 2">
+                    <p>Image Caption 2</p>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://via.placeholder.com/300x250" alt="Gallery image 3">
+                    <p>Image Caption 3</p>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://via.placeholder.com/300x250" alt="Gallery image 4">
+                    <p>Image Caption 4</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Video Section -->
+        <section class="section video-section">
+            <h2>Featured Video</h2>
+            <div class="video-container">
+                <iframe width="560" height="315" 
+                    src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+                    title="YouTube video player" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </section>
+
+        <!-- Tableau Section -->
+        <section class="section tableau-section">
+            <h2>Interactive Data Visualization</h2>
+            <p>Check out this interactive Tableau visualization:</p>
+            <div class="tableau-container">
+                <div class='tableauPlaceholder' id='viz1650000000000' style='position: relative'>
+                    <noscript>
+                        <a href='#'><img alt='Dashboard 1' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;ne&#47;newsdashboard&#47;Dashboard1&#47;1_rss.png' style='border: none' /></a>
+                    </noscript>
+                    <object class='tableauViz' style='display:none;'>
+                        <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+                        <param name='embed_resource_id' value='newsdashboard.Dashboard1' />
+                        <param name='display_static_image' value='yes' />
+                        <param name='display_spinner' value='yes' />
+                        <param name='display_error' value='yes' />
+                        <param name='showVizHome' value='no' />
+                    </object>
+                </div>
+                <script type='text/javascript'>
+                    var divElement = document.getElementById('viz1650000000000');
+                    var vizElement = divElement.getElementsByTagName('object')[0];
+                    vizElement.style.width='100%';
+                    vizElement.style.height=(divElement.offsetWidth*0.75)+'px';
+                    var scriptElement = document.createElement('script');
+                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+                    vizElement.parentNode.insertBefore(scriptElement, vizElement);
+                </script>
+            </div>
+        </section>
+
+        <!-- Resources Section -->
+        <section id="resources" class="section resources-section">
+            <h2>Helpful Resources</h2>
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <h3>Resource 1</h3>
+                    <p>Description of a helpful resource related to your topic.</p>
+                    <a href="#" class="resource-link">Learn More →</a>
+                </div>
+                <div class="resource-card">
+                    <h3>Resource 2</h3>
+                    <p>Another useful resource to help others explore your passion.</p>
+                    <a href="#" class="resource-link">Learn More →</a>
+                </div>
+                <div class="resource-card">
+                    <h3>Resource 3</h3>
+                    <p>A third resource that provides valuable information.</p>
+                    <a href="#" class="resource-link">Learn More →</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Web App Link -->
+        <section class="section app-section">
+            <h2>Interactive Web App</h2>
+            <p>Check out my AI-created web app project:</p>
+            <a href="../web-app/index.html" class="btn btn-app">Launch Web App →</a>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2026 | My [Topic] Page | <a href="../index.html">Back to Portfolio</a></p>
+    </footer>
+</body>
+</html>

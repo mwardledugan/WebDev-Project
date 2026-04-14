@@ -1,0 +1,257 @@
+/* =================================================
+   PROFESSIONAL PORTFOLIO - STYLE SHEET
+   Color Theme: Pink (#e91e63) - Modern & Professional
+   Framework: Bootstrap 5.3.0
+   ================================================= */
+
+/* General Styles */
+/* CSS Variables defined at root level for easy maintenance and consistency across site */
+:root {
+    --primary-color: #e91e63;  /* Pink accent color used throughout for branding */
+    --secondary-color: #6c757d;
+    --success-color: #198754;
+    --danger-color: #dc3545;
+    --light-bg: #f8f9fa;
+}
+
+/* Reset default browser margins and padding for consistent styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body: Professional sans-serif font with good line height for readability */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+}
+
+/* Hero Section - Eye-catching landing area with pink gradient background */
+/* Pink gradient creates strong visual hierarchy and draws visitor attention to main CTA buttons */
+.hero-section {
+    background: linear-gradient(135deg, #e91e63 0%, #c2185b 100%);
+    padding: 100px 0 !important;
+}
+
+/* Large headline with slide-down animation for engaging first impression */
+.hero-section h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    letter-spacing: -1px;
+    margin-bottom: 1rem;
+    animation: slideInDown 0.8s ease-out;  /* Slides title down on page load */
+}
+
+/* Subtitle with staggered slide-up animation for visual depth and hierarchy */
+.hero-section .lead {
+    font-size: 1.5rem;
+    font-weight: 300;
+    margin-bottom: 2rem;
+    animation: slideInUp 0.8s ease-out 0.2s backwards;  /* Slides up with 0.2s delay for staggered effect */
+}
+
+/* Projects Section - Displays portfolio work in an organized grid layout */
+.projects-section h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #212529;
+    margin-bottom: 3rem;
+}
+
+/* Card styling: Clean, modern look with no borders and rounded corners for softer appearance */
+.card {
+    border: none;  /* Removed default border for modern flat design aesthetic */
+    border-radius: 12px;  /* Rounded corners for approachable, modern look */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;  /* Smooth animation on hover */
+}
+
+/* Hover effect: Card lifts upward to indicate user can interact with it */
+/* This improves user experience by providing visual feedback */
+.card:hover {
+    transform: translateY(-10px);  /* Lifts card 10px up on hover */
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15) !important;  /* Enhanced shadow for floating effect */
+}
+
+/* Project title colors maintain branding consistency throughout the site */
+.card h5 {
+    color: var(--primary-color);  /* Pink color for visual consistency */
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+/* Skills Section */
+.skills-section {
+    background-color: #ffffff;
+    padding: 60px 0 !important;
+}
+
+.skills-section h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #212529;
+    margin-bottom: 3rem;
+}
+
+.skills-section h5 {
+    color: var(--primary-color);
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
+
+.skills-section ul li {
+    margin-bottom: 0.75rem;
+    font-size: 1.05rem;
+}
+
+/* Resume Styles */
+.resume-header {
+    margin-top: 2rem;
+}
+
+.resume-header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #212529;
+}
+
+.resume-header .text-muted {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+}
+
+.contact-info a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-size: 0.95rem;
+}
+
+.contact-info a:hover {
+    text-decoration: underline;
+}
+
+.section-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #212529;
+    border-left: 4px solid var(--primary-color);
+    padding-left: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.experience-item,
+.education-item {
+    padding-bottom: 2rem;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.experience-item:last-child,
+.education-item:last-child {
+    border-bottom: none;
+}
+
+.experience-item h5,
+.education-item h5 {
+    color: #212529;
+    font-weight: 600;
+}
+
+.company-name,
+.school-name {
+    color: var(--primary-color);
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.experience-item ul li,
+.education-item li {
+    margin-bottom: 0.5rem;
+    color: #555;
+}
+
+.skill-category h6 {
+    color: #212529;
+    margin-bottom: 0.5rem;
+}
+
+/* About Page Styles */
+.img-fluid.rounded-circle {
+    border: 5px solid var(--primary-color);
+    transition: transform 0.3s ease;
+}
+
+.img-fluid.rounded-circle:hover {
+    transform: scale(1.05);
+}
+
+/* Footer */
+footer {
+    background-color: #212529;
+    color: #fff;
+    margin-top: 5rem;
+}
+
+footer a {
+    color: #80a8e9;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+footer a:hover {
+    color: #fff;
+}
+
+/* =================================================
+   ANIMATIONS: Smooth visual effects for user engagement
+   ================================================= */
+
+/* Slide down animation: Used for h1 titles on page entrance */
+/* Creates polished, professional feel with smooth fade and movement */
+@keyframes slideInDown {
+    from {
+        opacity: 0;  /* Starts invisible */
+        transform: translateY(-30px);  /* Starts above final position */
+    }
+    to {
+        opacity: 1;  /* Fades in to full visibility */
+        transform: translateY(0);  /* Moves to final position */
+    }
+}
+
+/* Slide up animation: Used for subtitle text with delayed start */
+/* Staggered timing creates visual hierarchy and smooth entrance flow */
+@keyframes slideInUp {
+    from {
+        opacity: 0;  /* Starts invisible */
+        transform: translateY(30px);  /* Starts below final position */
+    }
+    to {
+        opacity: 1;  /* Fades in to full visibility */
+        transform: translateY(0);  /* Moves to final position */
+    }
+}
+
+/* =================================================
+   RESPONSIVE DESIGN: Adjusts layout for mobile devices
+   ================================================= */
+
+/* Mobile breakpoint: Screens 768px and smaller */
+/* Reduces font sizes for better readability on smaller screens */
+@media (max-width: 768px) {
+    .hero-section h1 {
+        font-size: 2rem;  /* Reduced from 3.5rem */
+    }
+
+    .hero-section .lead {
+        font-size: 1rem;  /* Reduced from 1.5rem */
+    }
+
+    .resume-header h1 {
+        font-size: 1.8rem;  /* Reduced from 2.5rem */
+    }
+
+    .section-title {
+        font-size: 1.4rem;  /* Reduced from 1.8rem */
+    }
+}

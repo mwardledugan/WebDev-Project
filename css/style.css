@@ -236,6 +236,19 @@ footer a:hover {
    RESPONSIVE DESIGN: Adjusts layout for mobile devices
    ================================================= */
 
+/* =================================================
+   Z-INDEX / STACKING CONTEXT: Manage layering of elements
+   ================================================= */
+
+/* Dropdown menu: Ensure visibility above sticky sidebar */
+.dropdown-menu {
+    z-index: 1050 !important;  /* Higher than Bootstrap default navbar z-index (1030) */
+}
+
+/* =================================================
+   RESPONSIVE DESIGN: Adjusts layout for mobile devices
+   ================================================= */
+
 /* Mobile breakpoint: Screens 768px and smaller */
 /* Reduces font sizes for better readability on smaller screens */
 @media (max-width: 768px) {

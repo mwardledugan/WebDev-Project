@@ -265,7 +265,7 @@
         <div class="score-board">
             <div class="score-item">
                 <div class="score-label">Question</div>
-                <div class="score-value"><span id="currentQuestion">1</span>/10</div>
+                <div class="score-value"><span id="currentQuestion">1</span>/15</div>
             </div>
             <div class="score-item">
                 <div class="score-label">Quirky Points</div>
@@ -771,7 +771,7 @@
         }
 
         function startGame() {
-            questions = shuffleArray(allQuestions).slice(0, 10);
+            questions = shuffleArray(allQuestions).slice(0, 15);
             currentQuestionIndex = 0;
             quirkyScore = 0;
             answered = false;

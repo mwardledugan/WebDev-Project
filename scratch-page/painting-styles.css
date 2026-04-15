@@ -432,7 +432,7 @@ html {
     overflow: hidden;
     box-shadow: var(--shadow-medium);
     background: white;
-    max-width: 800px;
+    max-width: 700px;
 }
 
 .tableauPlaceholder {

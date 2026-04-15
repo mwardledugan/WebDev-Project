@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Web App</title>
+    <title>Number Guessing Game</title>
     <style>
         * {
             margin: 0;
@@ -14,78 +14,238 @@
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
+            height: 100vh;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 1rem;
+            padding: 0;
+            overflow: hidden;
         }
 
         .container {
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            padding: 2rem;
-            max-width: 600px;
+            background: transparent;
+            border-radius: 0;
+            box-shadow: none;
+            padding: 1.5rem;
+            width: 100%;
+            height: 100vh;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 1rem;
+            max-width: none;
+            overflow-y: auto;
+        }
+
+        .game-area {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            flex: 1;
             width: 100%;
         }
 
+        .control-area {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: flex-start;
+            flex: 0 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            max-height: auto;
+            overflow-y: visible;
+            width: auto;
+            gap: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
         .header {
-            text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: 0.5rem;
+            order: unset;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
         }
 
         .header h1 {
-            color: #333;
-            margin-bottom: 0.5rem;
-            font-size: 2.5rem;
+            color: white;
+            margin-bottom: 0.2rem;
+            font-size: 2rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
         }
 
         .header p {
-            color: #666;
-            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.9rem;
         }
 
-        .content {
-            margin-bottom: 2rem;
-        }
-
-        .input-group {
+        .game-section {
             display: flex;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
+            justify-content: center;
+            margin: 0;
+            order: unset;
+            flex-grow: 1;
+            align-items: center;
+            width: 100%;
+            gap: 2rem;
             flex-wrap: wrap;
         }
 
-        input[type="text"],
-        input[type="number"],
-        select {
-            flex: 1;
-            min-width: 200px;
-            padding: 0.8rem;
-            border: 2px solid #ddd;
+        canvas {
+            border: 5px solid white;
             border-radius: 8px;
-            font-size: 1rem;
-            transition: border-color 0.3s;
+            background: white;
+            display: block;
+            max-width: 100%;
+            max-height: 70vh;
+            padding: 2rem;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
         }
 
-        input[type="text"]:focus,
-        input[type="number"]:focus,
-        select:focus {
+        .game-box {
+            background: white;
+            border: 5px solid white;
+            border-radius: 8px;
+            padding: 3rem 2rem;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            min-width: 300px;
+        }
+
+        .game-box h2 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .game-box p {
+            color: #666;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        input[type="number"] {
+            width: 80%;
+            padding: 0.75rem;
+            font-size: 1rem;
+            border: 2px solid #667eea;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            box-sizing: border-box;
+        }
+
+        input[type="number"]:focus {
             outline: none;
-            border-color: #667eea;
+            border-color: #764ba2;
+            box-shadow: 0 0 8px rgba(118, 75, 162, 0.3);
+        }
+
+        .feedback {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin: 1rem 0;
+            min-height: 30px;
+        }
+
+        .feedback.correct {
+            color: #27ae60;
+        }
+
+        .feedback.incorrect {
+            color: #e74c3c;
+        }
+
+        .feedback.hint {
+            color: #f39c12;
+        }
+
+        .stats {
+            display: flex;
+            gap: 1rem;
+            margin: 0;
+            width: auto;
+            order: unset;
+            flex-wrap: nowrap;
+        }
+
+        .stat-box {
+            background: white;
+            padding: 0.8rem 1.2rem;
+            border-radius: 8px;
+            border: 2px solid #667eea;
+            min-width: 100px;
+        }
+
+        .stat-box h4 {
+            color: #666;
+            font-size: 0.75rem;
+            margin-bottom: 0.3rem;
+            text-transform: uppercase;
+        }
+
+        .stat-box .value {
+            color: #667eea;
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+
+        .controls {
+            margin: 0;
+            padding: 1rem;
+            background: white;
+            border-radius: 8px;
+            border: 2px solid #667eea;
+            max-width: auto;
+            width: auto;
+            order: unset;
+            text-align: center;
+        }
+
+        .controls p {
+            color: #333;
+            margin-bottom: 0.3rem;
+            font-size: 0.85rem;
+        }
+
+        .arrow-keys {
+            display: grid;
+            grid-template-columns: repeat(3, 40px);
+            gap: 2px;
+            justify-content: center;
+            margin-top: 0.5rem;
+        }
+
+        .arrow {
+            padding: 6px;
+            background: #667eea;
+            color: white;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .arrow.spacer {
+            background: transparent;
         }
 
         button {
-            padding: 0.8rem 2rem;
+            padding: 0.6rem 1.2rem;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             border: none;
             border-radius: 8px;
-            font-size: 1rem;
+            font-size: 0.85rem;
             font-weight: 600;
             cursor: pointer;
             transition: transform 0.2s, box-shadow 0.2s;
+            margin: 0.3rem;
         }
 
         button:hover {
@@ -97,63 +257,27 @@
             transform: translateY(0);
         }
 
-        .result {
-            background: #f0f3ff;
-            border-left: 4px solid #667eea;
-            padding: 1.5rem;
-            border-radius: 8px;
-            margin-top: 1.5rem;
-            display: none;
+        .button-group {
+            display: flex;
+            flex-direction: row;
+            gap: 0.5rem;
+            justify-content: center;
+            width: auto;
+            margin: 0;
+            order: unset;
         }
 
-        .result.show {
-            display: block;
-            animation: slideIn 0.3s ease;
-        }
-
-        .result h3 {
-            color: #667eea;
-            margin-bottom: 0.5rem;
-        }
-
-        .result p {
-            color: #333;
-            line-height: 1.6;
-        }
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 1rem;
-            margin-top: 1.5rem;
-        }
-
-        .stat-box {
-            background: #f9f9f9;
-            padding: 1.5rem;
-            border-radius: 8px;
-            text-align: center;
-            border: 2px solid #eee;
-        }
-
-        .stat-box h4 {
-            color: #666;
-            font-size: 0.9rem;
-            margin-bottom: 0.5rem;
-            text-transform: uppercase;
-        }
-
-        .stat-box .value {
-            color: #667eea;
-            font-size: 2rem;
-            font-weight: 700;
+        button {
+            margin: 0;
         }
 
         .footer {
             text-align: center;
-            margin-top: 2rem;
-            padding-top: 1.5rem;
-            border-top: 2px solid #eee;
+            margin-top: 0.8rem;
+            padding-top: 0.8rem;
+            border-top: 1px solid #eee;
+            order: unset;
+            font-size: 0.8rem;
         }
 
         .footer a {
@@ -167,171 +291,354 @@
             color: #764ba2;
         }
 
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .footer p {
+            color: #999;
+            margin-top: 0.5rem;
+            font-size: 0.75rem;
         }
 
-        .error {
+        .footer p a {
+            color: #667eea;
+        }
+
+        .message {
             color: #e74c3c;
-            margin-top: 0.5rem;
+            margin-top: 0.3rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            order: unset;
+        }
+
+        .message.success {
+            color: #27ae60;
+        }
+
+        .final-score-display {
+            display: none;
+            margin-top: 1.5rem;
+            padding: 1rem 1.5rem;
+            background: white;
+            border-radius: 8px;
+            border: 3px solid #764ba2;
+            text-align: center;
+            order: unset;
+        }
+
+        .final-score-display.show {
+            display: block;
+        }
+
+        .final-score-display h3 {
+            color: #764ba2;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .final-score-display .score-value {
+            color: #667eea;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .game-buttons {
+            display: none;
+            gap: 0.8rem;
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+
+        .game-buttons.show {
+            display: flex;
+        }
+
+        .game-buttons button {
+            flex: 1;
+            max-width: 150px;
+            padding: 0.8rem 1.5rem;
             font-size: 0.9rem;
+        }
+
+        .attempts-list {
+            display: none;
+            margin-top: 0;
+            padding: 1rem;
+            background: #f9f9f9;
+            border-radius: 8px;
+            border: 2px solid #667eea;
+            text-align: left;
+            min-width: 200px;
+            height: fit-content;
+        }
+
+        .attempts-list.show {
+            display: block;
+        }
+
+        .attempts-list h4 {
+            color: #667eea;
+            margin-bottom: 0.8rem;
+            font-size: 1rem;
+        }
+
+        .attempts-list ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .attempts-list li {
+            padding: 0.5rem 0;
+            color: #666;
+            border-bottom: 1px solid #eee;
+            font-size: 0.9rem;
+        }
+
+        .attempts-list li:last-child {
+            border-bottom: none;
+        }
+
+        .attempts-list li.correct {
+            color: #27ae60;
+            font-weight: 600;
+        }
+
+        @media (max-width: 1024px) {
+            .container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .control-area {
+                flex-direction: column;
+                width: auto;
+                gap: 1rem;
+            }
+
+            canvas {
+                width: 100%;
+                height: auto;
+                max-width: 500px;
+            }
+
+            .game-section {
+                flex-direction: column;
+            }
+
+            .attempts-list {
+                min-width: auto;
+                width: 100%;
+                max-width: 400px;
+            }
         }
 
         @media (max-width: 600px) {
             .container {
-                padding: 1.5rem;
-            }
-
-            .header h1 {
-                font-size: 2rem;
-            }
-
-            .input-group {
+                padding: 1rem;
                 flex-direction: column;
             }
 
-            input[type="text"],
-            input[type="number"],
-            select,
-            button {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .control-area {
+                flex-direction: column;
                 width: 100%;
+                padding: 1rem;
+                gap: 0.8rem;
+            }
+
+            canvas {
+                width: 100%;
+                height: auto;
+                max-width: 400px;
+            }
+
+            button {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.8rem;
+            }
+
+            .stats {
+                max-width: 100%;
+            }
+
+            .controls {
+                max-width: 100%;
+            }
+
+            .game-section {
+                flex-direction: column;
+            }
+
+            .attempts-list {
+                min-width: auto;
+                width: 100%;
+                max-width: 100%;
             }
         }
     </style>
 </head>
-<body>
+<body id="top">
     <div class="container">
-        <div class="header">
-            <h1>🎮 Guessing Game</h1>
-            <p>Test your skills and beat the computer!</p>
-        </div>
-
-        <div class="content">
-            <div class="input-group">
-                <input type="number" id="userGuess" placeholder="Enter a number (1-100)" min="1" max="100">
-                <button onclick="checkGuess()">Guess</button>
-                <button onclick="newGame()" style="background: #999;">New Game</button>
+        <div class="game-area">
+            <div class="header">
+                <h1>🎮 Number Guessing Game</h1>
+                <p>I'm thinking of a number between 1 and 100. Can you guess it?</p>
             </div>
 
+            <div class="game-section">
+                <div class="game-box">
+                    <h2>Make a Guess!</h2>
+                    <input type="number" id="guessInput" min="1" max="100" placeholder="Enter a number..." autofocus>
+                    <button onclick="submitGuess()" style="width: 80%; margin-top: 0;">Submit Guess</button>
+                    <div class="feedback" id="feedback"></div>
+                    <div class="game-buttons" id="gameButtons">
+                        <button onclick="playAgain()">Play Again</button>
+                        <button onclick="resetGame()" style="background: #999;">Reset</button>
+                    </div>
+                </div>
+                <div class="attempts-list" id="attemptsList">
+                    <h4>Your Guesses:</h4>
+                    <ul id="attemptsUL"></ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="control-area">
             <div class="stats">
                 <div class="stat-box">
                     <h4>Attempts</h4>
-                    <div class="value" id="attempts">0</div>
+                    <div class="value" id="score">0</div>
                 </div>
                 <div class="stat-box">
                     <h4>Status</h4>
-                    <div class="value" id="status" style="font-size: 1.5rem;">-</div>
-                </div>
-                <div class="stat-box">
-                    <h4>Difficulty</h4>
-                    <div class="value" style="font-size: 1.5rem; color: #27ae60;">Easy</div>
+                    <div class="value" id="status">Playing</div>
                 </div>
             </div>
 
-            <div class="result" id="result">
-                <h3 id="resultTitle">Result</h3>
-                <p id="resultMessage">Your message here</p>
+            <div class="controls">
+                <p><strong>Hints:</strong></p>
+                <p style="margin-top: 0.5rem; font-size: 0.9rem;" id="hint">Start guessing to get hints!</p>
             </div>
-
-            <div id="errorMessage" class="error"></div>
         </div>
 
         <div class="footer">
             <a href="../scratch-page/index.html">← Back to Scratch Page</a>
-            <p style="color: #999; font-size: 0.9rem; margin-top: 1rem;">Think of a number between 1 and 100!</p>
+        </div>
         </div>
     </div>
 
     <script>
+        // Game variables
         let secretNumber = 0;
         let attempts = 0;
-        let gameActive = true;
+        let gameWon = false;
+        let guesses = [];
 
+        // Initialize game
         function initGame() {
             secretNumber = Math.floor(Math.random() * 100) + 1;
             attempts = 0;
-            gameActive = true;
-            updateDisplay();
-            clearMessages();
-            document.getElementById('userGuess').focus();
+            gameWon = false;
+            guesses = [];
+            document.getElementById('score').textContent = '0';
+            document.getElementById('status').textContent = 'Playing';
+            document.getElementById('feedback').textContent = '';
+            document.getElementById('feedback').className = 'feedback';
+            document.getElementById('hint').textContent = 'Start guessing to get hints!';
+            document.getElementById('guessInput').value = '';
+            document.getElementById('guessInput').focus();
+            document.getElementById('gameButtons').classList.remove('show');
+            document.getElementById('attemptsList').classList.remove('show');
         }
 
-        function checkGuess() {
-            if (!gameActive) {
-                alert('Game over! Click "New Game" to play again.');
+        // Add guess to list
+        function addGuessToList(guess, isCorrect = false) {
+            const li = document.createElement('li');
+            if (isCorrect) {
+                li.className = 'correct';
+                li.textContent = `Guess ${attempts}: ${guess} ✅ CORRECT!`;
+            } else {
+                li.textContent = `Guess ${attempts}: ${guess}`;
+            }
+            document.getElementById('attemptsUL').appendChild(li);
+        }
+
+        // Play again - start new game but keep attempts history visible
+        function playAgain() {
+            secretNumber = Math.floor(Math.random() * 100) + 1;
+            attempts = 0;
+            gameWon = false;
+            guesses = [];
+            document.getElementById('score').textContent = '0';
+            document.getElementById('status').textContent = 'Playing';
+            document.getElementById('feedback').textContent = '';
+            document.getElementById('feedback').className = 'feedback';
+            document.getElementById('hint').textContent = 'Start guessing to get hints!';
+            document.getElementById('guessInput').value = '';
+            document.getElementById('guessInput').focus();
+            document.getElementById('gameButtons').classList.remove('show');
+        }
+
+        // Reset game - clear everything including attempts history
+        function resetGame() {
+            initGame();
+            document.getElementById('attemptsUL').innerHTML = '';
+            document.getElementById('attemptsList').classList.remove('show');
+        }
+
+        // Submit guess
+        function submitGuess() {
+            // Freeze game if already won
+            if (gameWon) {
                 return;
             }
 
-            const guess = parseInt(document.getElementById('userGuess').value);
-            const errorDiv = document.getElementById('errorMessage');
+            const guessInput = document.getElementById('guessInput');
+            const guess = parseInt(guessInput.value);
 
-            // Validation
-            if (isNaN(guess)) {
-                errorDiv.textContent = 'Please enter a valid number!';
+            if (guessInput.value === '' || isNaN(guess) || guess < 1 || guess > 100) {
+                document.getElementById('feedback').textContent = '⚠️ Please enter a valid number between 1 and 100';
+                document.getElementById('feedback').className = 'feedback';
                 return;
             }
 
-            if (guess < 1 || guess > 100) {
-                errorDiv.textContent = 'Please enter a number between 1 and 100!';
-                return;
-            }
-
-            errorDiv.textContent = '';
             attempts++;
-            updateDisplay();
+            guesses.push(guess);
+            document.getElementById('score').textContent = attempts;
 
-            const result = document.getElementById('result');
-            const resultTitle = document.getElementById('resultTitle');
-            const resultMessage = document.getElementById('resultMessage');
+            const feedbackEl = document.getElementById('feedback');
+            const hintEl = document.getElementById('hint');
 
             if (guess === secretNumber) {
-                gameActive = false;
-                resultTitle.textContent = '🎉 You Won!';
-                resultMessage.textContent = `Congratulations! You guessed the number in ${attempts} attempts! The number was ${secretNumber}.`;
-                document.getElementById('status').textContent = '✓';
-                result.classList.add('show');
+                feedbackEl.textContent = `🎉 Correct! You guessed it in ${attempts} attempt${attempts !== 1 ? 's' : ''}!`;
+                feedbackEl.className = 'feedback correct';
+                document.getElementById('status').textContent = '✅ Won!';
+                gameWon = true;
+                addGuessToList(guess, true);
+                document.getElementById('gameButtons').classList.add('show');
+                document.getElementById('attemptsList').classList.add('show');
             } else if (guess < secretNumber) {
-                resultTitle.textContent = '📈 Too Low!';
-                resultMessage.textContent = `Your guess of ${guess} is too low. Try a higher number!`;
-                document.getElementById('status').textContent = '↑';
-                result.classList.add('show');
+                feedbackEl.textContent = '⬆️ Too low! Try a higher number.';
+                feedbackEl.className = 'feedback hint';
+                hintEl.textContent = `Keep trying! You're at attempt ${attempts}.`;
             } else {
-                resultTitle.textContent = '📉 Too High!';
-                resultMessage.textContent = `Your guess of ${guess} is too high. Try a lower number!`;
-                document.getElementById('status').textContent = '↓';
-                result.classList.add('show');
+                feedbackEl.textContent = '⬇️ Too high! Try a lower number.';
+                feedbackEl.className = 'feedback hint';
+                hintEl.textContent = `Keep trying! You're at attempt ${attempts}.`;
             }
 
-            document.getElementById('userGuess').value = '';
-            document.getElementById('userGuess').focus();
+            guessInput.value = '';
+            guessInput.focus();
         }
 
-        function updateDisplay() {
-            document.getElementById('attempts').textContent = attempts;
-        }
-
-        function clearMessages() {
-            document.getElementById('result').classList.remove('show');
-            document.getElementById('errorMessage').textContent = '';
-            document.getElementById('status').textContent = '-';
-        }
-
-        function newGame() {
-            initGame();
-        }
-
-        // Allow Enter key to guess
-        document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('userGuess').addEventListener('keypress', function(e) {
+        // Handle Enter key
+        document.addEventListener('DOMContentLoaded', () => {
+            const guessInput = document.getElementById('guessInput');
+            guessInput.addEventListener('keypress', (e) => {
                 if (e.key === 'Enter') {
-                    checkGuess();
+                    submitGuess();
                 }
             });
             initGame();

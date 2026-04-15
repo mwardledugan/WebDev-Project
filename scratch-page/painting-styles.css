@@ -1,0 +1,666 @@
+/* =================================================
+   PAINTING PAGE - CUSTOM STYLESHEET
+   Elegant, Artistic Design for Creative Expression
+   Created from scratch (not Bootstrap)
+   ================================================= */
+
+/* =================================================
+   1. ROOT & GENERAL STYLES
+   ================================================= */
+
+:root {
+    --primary-color: #2c3e50;
+    --accent-color: #e91e63;
+    --soft-accent: #f06292;
+    --light-bg: #faf8f6;
+    --dark-text: #2c3e50;
+    --light-text: #ffffff;
+    --border-subtle: #e8e8e8;
+    --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --shadow-medium: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* CUSTOM BACKGROUND: Soft, artistic gradient */
+body {
+    font-family: 'Georgia', 'Garamond', serif;
+    line-height: 1.8;
+    color: var(--dark-text);
+    background: linear-gradient(135deg, #faf8f6 0%, #f0ebe5 100%);
+    min-height: 100vh;
+    background-attachment: fixed;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* =================================================
+   2. NAVIGATION BAR
+   ================================================= */
+
+.navbar {
+    background-color: var(--primary-color);
+    padding: 1.2rem 0;
+    box-shadow: var(--shadow-medium);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-family: 'Trebuchet MS', 'Arial', sans-serif;
+    color: var(--light-text);
+    font-size: 1.8rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.nav-link {
+    color: #ecf0f1;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+}
+
+.nav-link:hover {
+    background-color: var(--accent-color);
+    color: var(--light-text);
+    transform: translateY(-2px);
+}
+
+.back-link {
+    background-color: var(--soft-accent);
+    color: var(--light-text);
+}
+
+/* =================================================
+   3. HERO SECTION with custom background
+   ================================================= */
+
+.hero {
+    background: linear-gradient(135deg, var(--accent-color) 0%, #c2185b 100%);
+    color: var(--light-text);
+    padding: 140px 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+        radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+}
+
+.hero-content h1 {
+    font-family: 'Trebuchet MS', sans-serif;
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--light-text);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    letter-spacing: 1px;
+}
+
+.tagline {
+    font-family: 'Trebuchet MS', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: #ecf0f1;
+    margin-bottom: 0.5rem;
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.9);
+    max-width: 600px;
+    margin: 0 auto;
+    font-style: italic;
+}
+
+/* =================================================
+   4. MAIN CONTAINER & SECTIONS (divs for layout)
+   ================================================= */
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* DIV 1, 2, 3: SECTION styling - main content divs */
+.section {
+    margin: 60px 0;
+    padding: 50px 40px;
+    background: var(--light-text);
+    border-radius: 12px;
+    box-shadow: var(--shadow-medium);
+    animation: fadeIn 0.6s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(0);
+    }
+}
+
+.section h2 {
+    font-family: 'Arial', 'Trebuchet MS', sans-serif;
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 3px solid var(--accent-color);
+    padding-bottom: 1rem;
+}
+
+.section h3 {
+    font-family: 'Trebuchet MS', sans-serif;
+    font-size: 1.8rem;
+    color: var(--accent-color);
+    margin: 2rem 0 1rem 0;
+}
+
+.section p {
+    font-size: 1.1rem;
+    line-height: 1.9;
+    color: #555;
+    margin-bottom: 1.5rem;
+}
+
+.section-content {
+    line-height: 1.9;
+}
+
+.section-intro {
+    font-style: italic;
+    color: #888;
+    font-size: 1rem;
+    margin-bottom: 2rem;
+}
+
+/* =================================================
+   5. ABOUT SECTION (DIV 1)
+   ================================================= */
+
+.about-section {
+    background: linear-gradient(to bottom, #ffffff 0%, #fafaf8 100%);
+}
+
+.intro-text {
+    background-color: #f9f9f9;
+    padding: 2rem;
+    border-left: 4px solid var(--accent-color);
+    border-radius: 8px;
+    margin: 2rem 0;
+}
+
+/* =================================================
+   6. LISTS STYLING (Nested Lists)
+   ================================================= */
+
+.lists-container {
+    background-color: #f5f0eb;
+    padding: 2rem;
+    border-left: 4px solid var(--accent-color);
+    border-radius: 8px;
+    margin: 2rem 0;
+}
+
+.outer-list {
+    list-style-type: decimal;
+    margin-left: 2rem;
+    margin-top: 1rem;
+}
+
+.outer-list li {
+    margin-bottom: 1.8rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    font-size: 1.1rem;
+}
+
+.outer-list p {
+    font-weight: normal;
+    color: #666;
+    margin: 0.5rem 0 0.8rem 0;
+    font-size: 1rem;
+}
+
+/* UNORDERED LIST inside ordered list */
+.inner-list {
+    list-style-type: circle;
+    margin-left: 2rem;
+    margin-top: 0.8rem;
+    font-weight: normal;
+    color: #555;
+}
+
+.inner-list li {
+    margin-bottom: 0.6rem;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+/* =================================================
+   7. REFLECTION TEXT
+   ================================================= */
+
+.reflection {
+    background: #fff9f7;
+    padding: 1.5rem;
+    border-radius: 8px;
+    border-top: 3px solid var(--accent-color);
+    font-style: italic;
+    color: #555;
+    margin-top: 2rem;
+}
+
+/* =================================================
+   8. GALLERY SECTION (DIV 2) with images
+   ================================================= */
+
+.gallery-section {
+    background: #fafaf8;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.gallery-item {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow-soft);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: white;
+}
+
+.gallery-item:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-medium);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    display: block;
+    background: #f9f9f9;
+    padding: 0;
+}
+
+.gallery-item .caption {
+    background: var(--primary-color);
+    color: var(--light-text);
+    padding: 1rem;
+    text-align: center;
+    font-size: 0.95rem;
+    margin: 0;
+    font-style: italic;
+}
+
+/* =================================================
+   9. VIDEO SECTION (DIV 3)
+   ================================================= */
+
+.media-section {
+    background: linear-gradient(to bottom, #ffffff 0%, #f9f8f7 100%);
+}
+
+.video-wrapper {
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 2px solid var(--border-subtle);
+}
+
+.video-wrapper h3 {
+    margin-bottom: 0.5rem;
+}
+
+.video-container {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 12px;
+    box-shadow: var(--shadow-medium);
+    margin-top: 1.5rem;
+    overflow: hidden;
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 12px;
+}
+
+.video-link {
+    text-decoration: none;
+    display: block;
+}
+
+.video-placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    color: white;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.video-placeholder:hover {
+    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+}
+
+/* =================================================
+   10. TABLEAU SECTION
+   ================================================= */
+
+.tableau-wrapper {
+    margin-top: 2rem;
+}
+
+.tableau-wrapper h3 {
+    margin-bottom: 0.5rem;
+}
+
+.tableau-container {
+    margin-top: 1.5rem;
+    border: 2px solid var(--border-subtle);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow-medium);
+    background: white;
+}
+
+.tableauPlaceholder {
+    width: 100%;
+}
+
+/* =================================================
+   10. ANALYTICS SECTION
+   ================================================= */
+
+.analytics-section {
+    background: linear-gradient(135deg, #f5ebe0 0%, #fff9f7 100%);
+    border-top: 4px solid var(--accent-color);
+    margin-top: 3rem;
+}
+
+.analytics-section h2 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.analytics-insight {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    border-left: 5px solid var(--accent-color);
+    box-shadow: var(--shadow-soft);
+}
+
+.analytics-insight h3 {
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+}
+
+.analytics-insight p {
+    line-height: 1.8;
+    color: var(--dark-text);
+    margin-bottom: 1rem;
+}
+
+.analytics-insight p:last-child {
+    margin-bottom: 0;
+}
+
+/* =================================================
+   11. REFLECTION SECTION
+   ================================================= */
+
+.reflection-section {
+    background: linear-gradient(135deg, #fff9f7 0%, #f5ebe0 100%);
+    border-top: 4px solid var(--accent-color);
+}
+
+.reflection-section p {
+    font-size: 1.15rem;
+    line-height: 2;
+    color: #444;
+}
+
+/* =================================================
+   12. CALL-TO-ACTION SECTION
+   ================================================= */
+
+.cta-section {
+    background: linear-gradient(135deg, var(--primary-color) 0%, #34495e 100%);
+    color: var(--light-text);
+    text-align: center;
+    padding: 60px 40px;
+}
+
+.cta-section h3 {
+    color: var(--light-text);
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+}
+
+.cta-button {
+    display: inline-block;
+    background-color: var(--accent-color);
+    color: var(--light-text);
+    padding: 1.2rem 2.5rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    border: 2px solid var(--accent-color);
+}
+
+.cta-button:hover {
+    background-color: transparent;
+    color: var(--accent-color);
+}
+
+.cta-subtitle {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.95rem;
+    margin-top: 1rem;
+    font-style: italic;
+}
+
+/* =================================================
+   13. FOOTER
+   ================================================= */
+
+.footer {
+    background-color: var(--primary-color);
+    color: #ecf0f1;
+    text-align: center;
+    padding: 2rem;
+    margin-top: 60px;
+    font-size: 0.95rem;
+}
+
+.footer a {
+    color: var(--accent-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    font-weight: 600;
+}
+
+.footer a:hover {
+    color: var(--soft-accent);
+}
+
+.footer p {
+    margin: 0.5rem 0;
+}
+
+/* =================================================
+   14. RESPONSIVE DESIGN
+   ================================================= */
+
+@media (max-width: 768px) {
+    .container {
+        padding: 0 1rem;
+    }
+
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero-content {
+        padding: 0 1rem;
+    }
+
+    .tagline {
+        font-size: 1.2rem;
+    }
+
+    .subtitle {
+        font-size: 1rem;
+    }
+
+    .hero {
+        padding: 80px 1rem;
+    }
+
+    .section {
+        margin: 30px 0;
+        padding: 30px 20px;
+    }
+
+    .section h2 {
+        font-size: 1.8rem;
+    }
+
+    .section h3 {
+        font-size: 1.3rem;
+    }
+
+    .section p {
+        font-size: 1rem;
+    }
+
+    .nav-links {
+        gap: 1rem;
+        font-size: 0.9rem;
+    }
+
+    .logo {
+        font-size: 1.4rem;
+    }
+
+    .gallery-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+    }
+
+    .gallery-item img {
+        height: 200px;
+    }
+
+    .video-container {
+        padding-bottom: 75%;
+    }
+
+    .outer-list {
+        margin-left: 1.5rem;
+    }
+
+    .inner-list {
+        margin-left: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-content h1 {
+        font-size: 1.8rem;
+    }
+
+    .tagline {
+        font-size: 1rem;
+    }
+
+    .subtitle {
+        font-size: 0.9rem;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .section {
+        padding: 20px 15px;
+    }
+
+    .gallery-grid {
+        grid-template-columns: 1fr;
+    }
+}

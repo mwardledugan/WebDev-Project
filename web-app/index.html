@@ -312,7 +312,7 @@
     </div>
 
     <script>
-        const questions = [
+        const allQuestions = [
             {
                 question: "Would you rather have spaghetti for hair...",
                 option1: "Spaghetti for hair (always cooked)",
@@ -402,14 +402,196 @@
                 quirky2: 5,
                 judgment1: "Fashion rebel! Chaotic neutral.",
                 judgment2: "Ultimate weirdo! Love the commitment!"
+            },
+            {
+                question: "Would you rather have...",
+                option1: "Eternal hiccups",
+                option2: "Permanent loud burps after eating",
+                quirky1: 4,
+                quirky2: 5,
+                judgment1: "Annoying but quirky!",
+                judgment2: "At least you'll clear a room!"
+            },
+            {
+                question: "Would you rather live...",
+                option1: "In a castle made of jello",
+                option2: "In a tree house that's upside down",
+                quirky1: 5,
+                quirky2: 5,
+                judgment1: "Bouncy! Different vibe.",
+                judgment2: "Dizzy living! I like your style."
+            },
+            {
+                question: "Would you rather be able to...",
+                option1: "Shoot lasers from your eyes",
+                option2: "Teleport but only backwards",
+                quirky1: 4,
+                quirky2: 5,
+                judgment1: "Classic superpower! Nice choice.",
+                judgment2: "Accidentally hilarious! I love it."
+            },
+            {
+                question: "Would you rather have...",
+                option1: "Wings made of feathers that fall out every week",
+                option2: "Fins instead of arms",
+                quirky1: 4,
+                quirky2: 5,
+                judgment1: "Maintenance nightmare, but cool!",
+                judgment2: "Communication skills might suffer."
+            },
+            {
+                question: "Would you rather spend a day...",
+                option1: "Speaking like a pirate",
+                option2: "Walking like a penguin",
+                quirky1: 4,
+                quirky2: 5,
+                judgment1: "Ahoy, quirky sailor!",
+                judgment2: "Waddling is the only way!"
+            },
+            {
+                question: "Would you rather have...",
+                option1: "Hair that changes color with your mood",
+                option2: "Skin that glows in the dark",
+                quirky1: 4,
+                quirky2: 5,
+                judgment1: "Built-in mood ring! Smart.",
+                judgment2: "Forever the life of the party!"
+            },
+            {
+                question: "Would you rather be cursed to...",
+                option1: "Only eat foods that are blue",
+                option2: "Only eat foods that smell weird",
+                quirky1: 3,
+                quirky2: 4,
+                judgment1: "Blueberries for life! Could be worse.",
+                judgment2: "Adventurous palate you'll have."
+            },
+            {
+                question: "Would you rather have to...",
+                option1: "Narrate your own life out loud",
+                option2: "Live in slow motion",
+                quirky1: 5,
+                quirky2: 4,
+                judgment1: "Full comedy channel vibes!",
+                judgment2: "The ultimate chill life."
+            },
+            {
+                question: "Would you rather live in a world where...",
+                option1: "Gravity works sideways",
+                option2: "Time moves in reverse",
+                quirky1: 5,
+                quirky2: 4,
+                judgment1: "Physics chaos! I'm here for it.",
+                judgment2: "Second chances galore!"
+            },
+            {
+                question: "Would you rather have...",
+                option1: "A pet rock that tells jokes",
+                option2: "A pet cloud that rains ice cream",
+                quirky1: 4,
+                quirky2: 5,
+                judgment1: "Comedy gold right there.",
+                judgment2: "Dessert from the sky? YES!"
+            },
+            {
+                question: "Would you rather be able to...",
+                option1: "Turn invisible when you sneeze",
+                option2: "Turn into a cactus when scared",
+                quirky1: 4,
+                quirky2: 5,
+                judgment1: "Perfect for ninjas with allergies!",
+                judgment2: "Emotional defense mechanism!"
+            },
+            {
+                question: "Would you rather have...",
+                option1: "Spaghetti arms that grow back",
+                option2: "Pasta legs that bend like noodles",
+                quirky1: 4,
+                quirky2: 5,
+                judgment1: "Flexible AND delicious!",
+                judgment2: "Acrobatics on a new level!"
+            },
+            {
+                question: "Would you rather live...",
+                option1: "In a house where everything is on the ceiling",
+                option2: "In a house that rotates every hour",
+                quirky1: 4,
+                quirky2: 5,
+                judgment1: "Brain-bending but doable!",
+                judgment2: "Constant redecoration vibes."
+            },
+            {
+                question: "Would you rather have to...",
+                option1: "Wear your shoes on the wrong feet",
+                option2: "Wear your clothes backwards",
+                quirky1: 3,
+                quirky2: 4,
+                judgment1: "Balance training activated!",
+                judgment2: "Fashion statement incoming!"
+            },
+            {
+                question: "Would you rather be able to...",
+                option1: "Communicate with plants",
+                option2: "Dance and make the ground shake",
+                quirky1: 4,
+                quirky2: 5,
+                judgment1: "Garden gossip unlocked!",
+                judgment2: "Every step is a performance!"
+            },
+            {
+                question: "Would you rather have...",
+                option1: "Magnets for hands that attract metal",
+                option2: "Suction cups for feet that stick anywhere",
+                quirky1: 4,
+                quirky2: 5,
+                judgment1: "Industrial accident waiting to happen!",
+                judgment2: "Spider-person achievement!"
+            },
+            {
+                question: "Would you rather live in a world where...",
+                option1: "Everyone has to wear wigs",
+                option2: "Everyone has to speak in accents",
+                quirky1: 3,
+                quirky2: 5,
+                judgment1: "Fashion chaos every day!",
+                judgment2: "Talking becomes theatrical!"
+            },
+            {
+                question: "Would you rather be able to...",
+                option1: "Smell colors",
+                option2: "See sounds",
+                quirky1: 4,
+                quirky2: 5,
+                judgment1: "Synesthesia deluxe!",
+                judgment2: "Music would never look the same!"
+            },
+            {
+                question: "Would you rather have...",
+                option1: "Antennae that pick up radio signals",
+                option2: "A tail that responds to your emotions",
+                quirky1: 4,
+                quirky2: 5,
+                judgment1: "Built-in entertainment system!",
+                judgment2: "No hiding your feelings now!"
             }
         ];
 
+        let questions = [];
         let currentQuestionIndex = 0;
         let quirkyScore = 0;
         let answered = false;
 
+        function shuffleArray(array) {
+            let shuffled = [...array];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            return shuffled;
+        }
+
         function startGame() {
+            questions = shuffleArray(allQuestions).slice(0, 10);
             currentQuestionIndex = 0;
             quirkyScore = 0;
             answered = false;

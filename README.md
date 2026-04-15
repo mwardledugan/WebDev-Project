@@ -1,103 +1,195 @@
-# Professional Portfolio Website
+# Maisa Wardle-Dugan's Professional Portfolio
 
-Welcome to your portfolio project! This is a fully structured professional website with multiple pages and components ready for customization.
+A fully functional professional portfolio website showcasing data analytics expertise, creative hobby passion, and interactive web development skills. The site features a responsive Bootstrap-based portfolio, a from-scratch custom-coded hobby page, and an interactive personality quiz game.
+
+🌐 **Live Site:** [https://mwardledugan.github.io/WebDev-Project/](https://mwardledugan.github.io/WebDev-Project/)
 
 ## 📁 Project Structure
 
 ```
-WebDev Project/
-├── index.html                 # Main professional homepage
-├── resume.html                # HTML-based resume page
-├── about.html                 # About/Bio page
+WebDev-Project/
+├── index.html                          # Professional homepage with portfolio
+├── resume.html                         # HTML resume with section navigation
+├── about.html                          # Professional bio page
 ├── css/
-│   └── style.css             # Professional page styling
-├── js/                        # For future JavaScript
-├── images/                    # Your images folder
+│   └── style.css                       # Professional page styling (pink theme #e91e63)
+├── images/
+│   ├── Painting.png                    # Artwork 1
+│   ├── Painting2.png                   # Artwork 2
+│   ├── Painting3.png                   # Artwork 3
+│   └── Painting4.png                   # Artwork 4
 ├── scratch-page/
-│   ├── index.html            # Your from-scratch page (hobby/passion project)
-│   └── scratch-page-styles.css # Custom CSS for scratch page
-└── web-app/
-    └── index.html            # Interactive web app (number guessing game starter)
+│   ├── index.html                      # From-scratch painting hobby page
+│   └── painting-styles.css             # Custom CSS (600+ lines)
+├── web-app/
+│   └── index.html                      # Would You Rather Game (HTML/CSS/JS)
+└── README.md                           # This file
 ```
 
-## 🎯 What You Need to Do
+## ✨ Project Highlights
 
-### 1. **Professional Bootstrap Pages** (Currently Done!)
-- ✅ `index.html` - Home page with projects and skills
-- ✅ `resume.html` - Full HTML-based resume
-- ✅ `about.html` - About/Bio page
-- ✅ Professional CSS styling in `css/style.css`
+### 🏢 Professional Pages (Bootstrap 5.3.0)
+- **index.html** - Portfolio homepage with:
+  - Navigation bar with smooth anchor scrolling
+  - Featured projects section (Tableau, Data Visualization, SQL)
+  - Skills showcase
+  - Links to painting hobby page and interactive game
+  - Social links (LinkedIn, GitHub, Email)
+  - Responsive design across all screen sizes
 
-**TO CUSTOMIZE:**
-- Edit the placeholder content in all HTML files
-- Add your real information (name, projects, skills, experience)
-- Add real images to the `images/` folder
-- Update links in the footer and navigation
+- **resume.html** - Professional resume with:
+  - Sticky sidebar navigation (Quick Links + Sections)
+  - 6 organized resume sections with smooth scrolling
+  - Education, Experience, Skills, Projects, Certifications, Languages
+  - Download PDF functionality
+  - Styled with custom pink theme
 
-### 2. **Scratch Page** (Structure Ready, Content Needed!)
+- **about.html** - Professional bio page
+  - Company and role information
+  - Professional narrative and skills
+  - Responsive card layouts
+
+### 🎨 From-Scratch Painting Hobby Page
 **File:** `scratch-page/index.html`
 
-This page demonstrates your HTML/CSS skills with:
-- ✅ Nested lists (ordered inside unordered or vice versa)
-- ✅ Multiple images from gallery
-- ✅ Embedded YouTube video support
-- ✅ On-page anchors (About, Gallery, Resources)
-- ✅ Custom background gradient
-- ✅ At least 4+ CSS style definitions
-- ✅ Font color and font family specs
-- ✅ 3+ divs for positioning
-- ✅ Tableau graph placeholder
-- ✅ Navigation back to professional pages
+Demonstrates advanced HTML/CSS skills with:
+- ✅ **Nested Lists** - Bulleted lists within numbered lists
+- ✅ **Multiple Images** - 4 artwork images with captions
+- ✅ **Embedded YouTube Video** - Painting tutorial link
+- ✅ **On-Page Anchors** - 4 sections (About, Gallery, Tableau, Bridge)
+- ✅ **Custom Background** - Gradient backgrounds and overlays
+- ✅ **Advanced CSS** - 600+ lines including:
+  - Font family specifications (Poppins, Playfair Display, Open Sans)
+  - Font colors and opacity variations
+  - Div positioning (flexbox, grid, absolute positioning)
+  - 3+ divs for layout structure
+  - Smooth transitions and animations
+- ✅ **Interactive Tableau Visualization** - Social media impact data chart
+- ✅ **Navigation** - Links back to portfolio and game pages
 
-**TO CUSTOMIZE:**
-1. Replace `[Your Topic]` and `[your topic]` with your actual hobby/passion
-2. Write your own content in each section
-3. Add real images to match your topic
-4. Replace the YouTube video ID (currently "dQw4w9WgXcQ") with an actual video
+**Content:** Explores the connection between painting as a creative practice and professional data analytics work. Includes:
+- Personal narrative about painting practice
+- How painting skills translate to work (presence, problem-solving, visual communication)
+- Gallery of artwork
+- Educational resources
+- Tableau data visualization on creative work impact
 
-**YouTube Video Embedding:**
-Find a video you like on YouTube, then use this format:
-```html
-<iframe width="560" height="315" 
-    src="https://www.youtube.com/embed/VIDEO_ID_HERE" 
-    ...>
-</iframe>
-```
-
-**Tableau Graph:**
-Visit [Tableau Public](https://public.tableau.com) to find interactive visualizations. Embed one using their provided code.
-
-### 3. **Web App** (Starter Template Included!)
+### 🎮 Interactive Would You Rather Game
 **File:** `web-app/index.html`
 
-Currently includes: ✨ **Number Guessing Game**
+A personality quiz game built with HTML/CSS/JavaScript featuring:
+- **50 hilarious "would you rather" questions** covering ridiculous dilemmas
+- **15 random questions per game** - different selection every playthrough
+- **Quirky point system** - 0-4 points per answer with randomized combinations
+- **10 personality result tiers:**
+  - 🎯 Perfectly Sensible (0-4 points)
+  - 📚 Wise Conservative (5-9 points)
+  - 🎯 Pragmatic Soul (10-14 points)
+  - 🌟 Grounded Explorer (15-19 points)
+  - ⭐ Balanced Adventurer (20-24 points)
+  - ✨ Spirited Rebel (25-29 points)
+  - 🚀 Adventurous Spirit (30-34 points)
+  - 🎨 Creative Chaos (35-39 points)
+  - 🎪 Certified Weirdo (40-44 points)
+  - 🌈 Ultimate Chaos Agent (45-50 points)
 
 **Features:**
-- ✅ One-page HTML/CSS/JavaScript combo
-- ✅ Interactive and fun
-- ✅ Responsive design
-- ✅ Statistics tracking
+- Real-time score tracking with progress bar
+- Personality judgments after each answer
+- 1.5-second transition between questions
+- Smooth animations and polished UI
+- Personality results screen with detailed descriptions
 
-**Options for Customization:**
-- **Keep it as is** and just test it works
-- **Modify it** - Change the game difficulty or add features
-- **Replace it** - Build your own app (riddle generator, joke generator, snake game, etc.)
+## 🔗 Navigation & Page Connectivity
 
-### 4. **Hosting on GitHub Pages**
-1. Create a GitHub repository called `username.github.io` (replace with your actual username)
-2. Upload all files from `WebDev Project/` to the repository
-3. Your site will be live at `https://username.github.io`
+**From Portfolio:**
+- Home page with links to resume, about, painting page, and game
+- Anchor links to projects and skills sections
+- All social media links
 
-The scratch page and web app won't be discoverable from the main portfolio (for privacy), but they'll work when you visit them directly:
-- **Scratch page:** `https://username.github.io/scratch-page/`
-- **Web app:** `https://username.github.io/web-app/`
+**From Painting Page:**
+- Navigation bar with page sections
+- Link to play the game
+- Back to portfolio link
 
-## ✅ Checklist Before Hosting
+**From Game Page:**
+- Link to view art
+- Back to portfolio link
 
-- [ ] Replace all placeholder text with real content
-- [ ] Add real images (ensure they're linked correctly)
-- [ ] Update resume with your actual education, experience, skills
-- [ ] Customize scratch page with your topic and content
+All pages are fully interconnected for seamless user experience!
+
+## 🛠️ Technologies Used
+
+- **HTML5** - Semantic markup
+- **CSS3** - Custom styling with gradients, flexbox, transitions
+- **JavaScript** - Game logic, interactive features, animations
+- **Bootstrap 5.3.0** - Professional page framework
+- **Tableau Public** - Interactive data visualization
+- **YouTube API** - Embedded video content
+- **GitHub Pages** - Web hosting
+
+## 📊 Development Features
+
+### Responsive Design
+- Mobile-friendly layouts
+- Tested across device sizes
+- Smooth navigation experience
+
+### User Experience
+- Smooth scroll behavior with navbar offset calculations
+- Fast gameplay with optimized timing
+- Clear visual feedback for interactions
+- Professional color scheme (pink #e91e63 theme)
+
+### Performance
+- Optimized image loading
+- Efficient CSS selectors
+- Minimal JavaScript footprint
+- GitHub Pages CDN deployment
+
+## 🎯 Project Requirements Met
+
+✅ Professional Bootstrap pages (index, resume, about)
+✅ From-scratch HTML/CSS hobby page with all components
+✅ Custom stylesheet (600+ lines)
+✅ Responsive design across all pages
+✅ Interactive web app (personality quiz game)
+✅ Navigation between all pages
+✅ GitHub Pages deployment
+✅ Image gallery with 4+ images
+✅ Embedded YouTube video
+✅ Interactive Tableau visualization
+✅ On-page anchor links with smooth scrolling
+✅ Nested lists
+✅ Multiple CSS styling techniques
+✅ JavaScript interactivity
+
+## 🚀 How to Use
+
+1. **View Online:** Visit [https://mwardledugan.github.io/WebDev-Project/](https://mwardledugan.github.io/WebDev-Project/)
+2. **Navigate Pages:** Use the navigation bar or page links
+3. **Play Game:** Click "Play Game" button - choose answers and discover your personality!
+4. **View Art:** Explore the painting hobby page with gallery and video
+5. **Read Resume:** Check out the organized resume with section navigation
+
+## 📝 Notable Implementation Details
+
+- **Smooth Scrolling:** Custom JavaScript calculates navbar height for accurate anchor positioning
+- **Game Randomization:** Fisher-Yates shuffle algorithm ensures different question order each game
+- **Personality Scoring:** Dynamic tier assignment based on point accumulation
+- **Tab Management:** Game and painting pages open in new tabs with proper closing functionality
+- **Custom Theme:** Consistent pink (#e91e63) branding across professional pages
+
+## 👩‍💻 Creator
+
+Maisa Wardle-Dugan
+- **Portfolio:** [https://mwardledugan.github.io/WebDev-Project/](https://mwardledugan.github.io/WebDev-Project/)
+- **GitHub:** [https://github.com/mwardledugan](https://github.com/mwardledugan)
+- **LinkedIn:** [https://www.linkedin.com/in/maisa-wardle-dugan-4659781a5/](https://www.linkedin.com/in/maisa-wardle-dugan-4659781a5/)
+
+## 📅 Last Updated
+
+April 15, 2026
 - [ ] Test all links work (internal and external)
 - [ ] Test YouTube video plays when hosted online
 - [ ] Verify Tableau graph loads

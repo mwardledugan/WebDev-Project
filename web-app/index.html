@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Number Guessing Game</title>
+    <title>Would You Rather Game</title>
     <style>
         * {
             margin: 0;
@@ -19,26 +19,754 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 0;
-            overflow: hidden;
+            padding: 20px;
+            overflow: auto;
         }
 
         .container {
-            background: transparent;
-            border-radius: 0;
-            box-shadow: none;
-            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
             width: 100%;
-            height: 100vh;
+            padding: 40px;
             text-align: center;
+        }
+
+        h1 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 2.5rem;
+        }
+
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        .score-board {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 30px;
+            gap: 20px;
+        }
+
+        .score-item {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            font-weight: bold;
+            flex: 1;
+        }
+
+        .score-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-bottom: 5px;
+        }
+
+        .score-value {
+            font-size: 2rem;
+        }
+
+        .question-container {
+            margin-bottom: 30px;
+        }
+
+        .question {
+            font-size: 1.3rem;
+            color: #333;
+            margin-bottom: 25px;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+
+        .question-number {
+            color: #667eea;
+            font-weight: 700;
+        }
+
+        .options {
             display: flex;
             flex-direction: column;
-            justify-content: flex-start;
-            align-items: center;
-            gap: 1rem;
-            max-width: none;
-            overflow-y: auto;
+            gap: 15px;
         }
+
+        .option-btn {
+            background: white;
+            border: 3px solid #667eea;
+            color: #667eea;
+            padding: 15px 20px;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        .option-btn:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .option-btn:active {
+            transform: translateY(0);
+        }
+
+        .judgment {
+            background: linear-gradient(135deg, #ffd89b 0%, #19547b 100%);
+            color: #333;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            display: none;
+        }
+
+        .judgment.show {
+            display: block;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .results-screen {
+            display: none;
+            animation: slideIn 0.5s ease;
+        }
+
+        .results-screen.show {
+            display: block;
+        }
+
+        .results-screen h2 {
+            color: #667eea;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .personality {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .personality-title {
+            font-weight: 700;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+
+        .back-link {
+            margin-top: 30px;
+        }
+
+        .back-link a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .back-link a:hover {
+            color: white;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #ddd;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 25px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .question {
+                font-size: 1.1rem;
+            }
+
+            .option-btn {
+                font-size: 1rem;
+                padding: 12px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🤔 Would You Rather?</h1>
+        <p class="subtitle">Choose wisely... your taste is being judged</p>
+
+        <div class="score-board">
+            <div class="score-item">
+                <div class="score-label">Question</div>
+                <div class="score-value"><span id="currentQuestion">1</span>/10</div>
+            </div>
+            <div class="score-item">
+                <div class="score-label">Quirky Points</div>
+                <div class="score-value" id="quirkyScore">0</div>
+            </div>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+
+        <div id="gameContainer">
+            <div class="judgment" id="judgment"></div>
+            <div class="question-container">
+                <p class="question">
+                    <span class="question-number">Question <span id="questionNum">1</span>:</span><br>
+                    <span id="questionText"></span>
+                </p>
+                <div class="options">
+                    <button class="option-btn" id="option1" onclick="answerQuestion(1)"></button>
+                    <button class="option-btn" id="option2" onclick="answerQuestion(2)"></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="results-screen" id="resultsScreen">
+            <h2>Game Over! 🎉</h2>
+            <div class="personality">
+                <div class="personality-title" id="personalityTitle"></div>
+                <div id="personalityDesc"></div>
+            </div>
+            <p style="color: #666; margin-bottom: 20px; font-size: 1.1rem;">
+                You earned <strong id="finalScore">0</strong> Quirky Points!
+            </p>
+            <div class="button-group">
+                <button class="btn" onclick="startGame()">Play Again</button>
+                <button class="btn btn-secondary" onclick="goHome()">Back to Home</button>
+            </div>
+        </div>
+
+        <div class="back-link">
+            <a href="../index.html">← Back to Portfolio</a>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                question: "Would you rather have spaghetti for hair...",
+                option1: "Spaghetti for hair (always cooked)",
+                option2: "Maple syrup for sweat",
+                quirky1: 3,
+                quirky2: 5,
+                judgment1: "Classic choice! At least you can eat your mistakes.",
+                judgment2: "Bold! Your gym sessions would be sticky situations."
+            },
+            {
+                question: "Would you rather live in a world where...",
+                option1: "Everyone walks backwards",
+                option2: "Everyone communicates in rhymes",
+                quirky1: 4,
+                quirky2: 5,
+                judgment1: "Practical! You'd see where you've been.",
+                judgment2: "Poetic! You're a true wordsmith."
+            },
+            {
+                question: "Would you rather have...",
+                option1: "Tiny hands (permanently)",
+                option2: "Giant feet (permanently)",
+                quirky1: 5,
+                quirky2: 4,
+                judgment1: "Small but mighty! You're thinking big despite the obstacles.",
+                judgment2: "Great for balance... and kicking stuff."
+            },
+            {
+                question: "Would you rather be able to...",
+                option1: "Speak to animals",
+                option2: "Speak all human languages",
+                quirky1: 5,
+                quirky2: 3,
+                judgment1: "Adventurous! Ready for the barnyard gossip?",
+                judgment2: "Practical! You're the diplomat."
+            },
+            {
+                question: "Would you rather have to wear...",
+                option1: "Roller skates everywhere (permanently)",
+                option2: "A tiara at all times (permanently)",
+                quirky1: 4,
+                quirky2: 5,
+                judgment1: "Speedy! Are you training for the Olympics?",
+                judgment2: "Majestic! You rule the world!"
+            },
+            {
+                question: "Would you rather live in a house made of...",
+                option1: "Candy that tastes good but never spoils",
+                option2: "Ice that never melts",
+                quirky1: 5,
+                quirky2: 3,
+                judgment1: "Sweet! Your dental bills would be WILD.",
+                judgment2: "Cool choice! Literally."
+            },
+            {
+                question: "Would you rather be able to...",
+                option1: "Control the weather with your mind",
+                option2: "Read everyone's thoughts",
+                quirky1: 4,
+                quirky2: 5,
+                judgment1: "Powerful! You're a weather god.",
+                judgment2: "Risky! Some thoughts should stay private."
+            },
+            {
+                question: "Would you rather have to take...",
+                option1: "A vacation to a place with no internet (2 weeks)",
+                option2: "A vacation where it rains everywhere you go",
+                quirky1: 3,
+                quirky2: 4,
+                judgment1: "Brave! Can you survive the digital detox?",
+                judgment2: "Romantic! Rainy days are peaceful."
+            },
+            {
+                question: "Would you rather have as a pet...",
+                option1: "A miniature dragon",
+                option2: "A unicorn that talks",
+                quirky1: 5,
+                quirky2: 5,
+                judgment1: "Fire-breathing bestie! Epic choice!",
+                judgment2: "Magical friend! True fantasies here!"
+            },
+            {
+                question: "Would you rather be forced to...",
+                option1: "Always wear mismatched socks",
+                option2: "Always walk in zigzags",
+                quirky1: 3,
+                quirky2: 5,
+                judgment1: "Fashion rebel! Chaotic neutral.",
+                judgment2: "Ultimate weirdo! Love the commitment!"
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        let quirkyScore = 0;
+        let answered = false;
+
+        function startGame() {
+            currentQuestionIndex = 0;
+            quirkyScore = 0;
+            answered = false;
+            document.getElementById('gameContainer').style.display = 'block';
+            document.getElementById('resultsScreen').classList.remove('show');
+            document.getElementById('judgment').innerHTML = '';
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            if (currentQuestionIndex >= questions.length) {
+                showResults();
+                return;
+            }
+
+            answered = false;
+            const question = questions[currentQuestionIndex];
+            document.getElementById('questionText').textContent = question.question;
+            document.getElementById('questionNum').textContent = currentQuestionIndex + 1;
+            document.getElementById('currentQuestion').textContent = currentQuestionIndex + 1;
+            document.getElementById('option1').textContent = '✨ ' + question.option1;
+            document.getElementById('option2').textContent = '✨ ' + question.option2;
+            document.getElementById('judgment').innerHTML = '';
+            document.getElementById('judgment').classList.remove('show');
+
+            // Update progress bar
+            const progress = ((currentQuestionIndex) / questions.length) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+        }
+
+        function answerQuestion(optionNum) {
+            if (answered) return;
+            answered = true;
+
+            const question = questions[currentQuestionIndex];
+            let earnedPoints = optionNum === 1 ? question.quirky1 : question.quirky2;
+            let judgment = optionNum === 1 ? question.judgment1 : question.judgment2;
+
+            quirkyScore += earnedPoints;
+            document.getElementById('quirkyScore').textContent = quirkyScore;
+
+            document.getElementById('judgment').innerHTML = judgment + ' <strong>+' + earnedPoints + ' Quirky Points!</strong>';
+            document.getElementById('judgment').classList.add('show');
+
+            document.getElementById('option1').disabled = true;
+            document.getElementById('option2').disabled = true;
+
+            setTimeout(() => {
+                currentQuestionIndex++;
+                loadQuestion();
+            }, 2000);
+        }
+
+        function showResults() {
+            document.getElementById('gameContainer').style.display = 'none';
+            document.getElementById('resultsScreen').classList.add('show');
+            document.getElementById('finalScore').textContent = quirkyScore;
+
+            let personality = getPersonality(quirkyScore);
+            document.getElementById('personalityTitle').textContent = personality.title;
+            document.getElementById('personalityDesc').textContent = personality.description;
+        }
+
+        function getPersonality(score) {
+            if (score >= 45) {
+                return {
+                    title: '🌈 Ultimate Chaos Agent',
+                    description: 'You\'re HILARIOUSLY quirky! You were born to break the mold and make the world more entertaining. Everything is a joke to you, and honestly? We need more of that energy!'
+                };
+            } else if (score >= 37) {
+                return {
+                    title: '🎨 Creative Weirdo',
+                    description: 'You\'re definitely weird, but in the BEST way! Your imagination is off the charts, and you\'re not afraid to color outside the lines. Embrace your beautiful chaos!'
+                };
+            } else if (score >= 30) {
+                return {
+                    title: '🚀 Adventurous Spirit',
+                    description: 'You\'re quirky with purpose! You make bold choices, but you\'re not completely unpredictable. You\'re the friend everyone wants at a party!'
+                };
+            } else if (score >= 20) {
+                return {
+                    title: '⭐ Balanced Rebel',
+                    description: 'You\'re a little bit quirky, a little bit practical. You know how to have fun without losing your grip on reality. Solid choices!'
+                };
+            } else {
+                return {
+                    title: '🎯 Perfectly Sensible',
+                    description: 'You\'re the responsible one! Practical, logical, and probably make very good life decisions. But... have you considered being weird once in a while?'
+                };
+            }
+        }
+
+        function goHome() {
+            window.location.href = '../index.html';
+        }
+
+        window.onload = startGame;
+    </script>
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Would You Rather Game</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow: auto;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            width: 100%;
+            padding: 40px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 2.5rem;
+        }
+
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        .score-board {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 30px;
+            gap: 20px;
+        }
+
+        .score-item {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            font-weight: bold;
+            flex: 1;
+        }
+
+        .score-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-bottom: 5px;
+        }
+
+        .score-value {
+            font-size: 2rem;
+        }
+
+        .question-container {
+            margin-bottom: 30px;
+        }
+
+        .question {
+            font-size: 1.3rem;
+            color: #333;
+            margin-bottom: 25px;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+
+        .question-number {
+            color: #667eea;
+            font-weight: 700;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .option-btn {
+            background: white;
+            border: 3px solid #667eea;
+            color: #667eea;
+            padding: 15px 20px;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        .option-btn:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .option-btn:active {
+            transform: translateY(0);
+        }
+
+        .judgment {
+            background: linear-gradient(135deg, #ffd89b 0%, #19547b 100%);
+            color: #333;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            display: none;
+        }
+
+        .judgment.show {
+            display: block;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .results-screen {
+            display: none;
+            animation: slideIn 0.5s ease;
+        }
+
+        .results-screen.show {
+            display: block;
+        }
+
+        .results-screen h2 {
+            color: #667eea;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .personality {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .personality-title {
+            font-weight: 700;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+
+        .back-link {
+            margin-top: 30px;
+        }
+
+        .back-link a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .back-link a:hover {
+            color: white;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #ddd;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 25px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .question {
+                font-size: 1.1rem;
+            }
+
+            .option-btn {
+                font-size: 1rem;
+                padding: 12px 15px;
+            }
+        }
+    </style>
 
         .game-area {
             display: flex;
@@ -479,55 +1207,263 @@
         }
     </style>
 </head>
-<body id="top">
+<body>
     <div class="container">
-        <div class="game-area">
-            <div class="header">
-                <h1>🎮 Number Guessing Game</h1>
-                <p>I'm thinking of a number between 1 and 100. Can you guess it?</p>
-            </div>
+        <h1>🤔 Would You Rather?</h1>
+        <p class="subtitle">Choose wisely... your taste is being judged</p>
 
-            <div class="game-section">
-                <div class="game-box">
-                    <h2>Make a Guess!</h2>
-                    <input type="number" id="guessInput" min="1" max="100" placeholder="Enter a number..." autofocus>
-                    <button onclick="submitGuess()" style="width: 80%; margin-top: 0;">Submit Guess</button>
-                    <div class="feedback" id="feedback"></div>
-                    <div class="game-buttons" id="gameButtons">
-                        <button onclick="playAgain()">Play Again</button>
-                        <button onclick="resetGame()" style="background: #999;">Reset</button>
-                    </div>
-                </div>
-                <div class="attempts-list" id="attemptsList">
-                    <h4>Your Guesses:</h4>
-                    <ul id="attemptsUL"></ul>
+        <div class="score-board">
+            <div class="score-item">
+                <div class="score-label">Question</div>
+                <div class="score-value"><span id="currentQuestion">1</span>/10</div>
+            </div>
+            <div class="score-item">
+                <div class="score-label">Quirky Points</div>
+                <div class="score-value" id="quirkyScore">0</div>
+            </div>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+
+        <div id="gameContainer">
+            <div class="judgment" id="judgment"></div>
+            <div class="question-container">
+                <p class="question">
+                    <span class="question-number">Question <span id="questionNum">1</span>:</span><br>
+                    <span id="questionText"></span>
+                </p>
+                <div class="options">
+                    <button class="option-btn" id="option1" onclick="answerQuestion(1)"></button>
+                    <button class="option-btn" id="option2" onclick="answerQuestion(2)"></button>
                 </div>
             </div>
         </div>
 
-        <div class="control-area">
-            <div class="stats">
-                <div class="stat-box">
-                    <h4>Attempts</h4>
-                    <div class="value" id="score">0</div>
-                </div>
-                <div class="stat-box">
-                    <h4>Status</h4>
-                    <div class="value" id="status">Playing</div>
-                </div>
+        <div class="results-screen" id="resultsScreen">
+            <h2>Game Over! 🎉</h2>
+            <div class="personality">
+                <div class="personality-title" id="personalityTitle"></div>
+                <div id="personalityDesc"></div>
             </div>
-
-            <div class="controls">
-                <p><strong>Hints:</strong></p>
-                <p style="margin-top: 0.5rem; font-size: 0.9rem;" id="hint">Start guessing to get hints!</p>
+            <p style="color: #666; margin-bottom: 20px; font-size: 1.1rem;">
+                You earned <strong id="finalScore">0</strong> Quirky Points!
+            </p>
+            <div class="button-group">
+                <button class="btn" onclick="startGame()">Play Again</button>
+                <button class="btn btn-secondary" onclick="goHome()">Back to Home</button>
             </div>
         </div>
 
-        <div class="footer">
-            <a href="../scratch-page/index.html">← Back to Scratch Page</a>
-        </div>
+        <div class="back-link">
+            <a href="../index.html">← Back to Portfolio</a>
         </div>
     </div>
+
+    <script>
+        const questions = [
+            {
+                question: "Would you rather have spaghetti for hair...",
+                option1: "Spaghetti for hair (always cooked)",
+                option2: "Maple syrup for sweat",
+                quirky1: 3,
+                quirky2: 5,
+                judgment1: "Classic choice! At least you can eat your mistakes.",
+                judgment2: "Bold! Your gym sessions would be sticky situations."
+            },
+            {
+                question: "Would you rather live in a world where...",
+                option1: "Everyone walks backwards",
+                option2: "Everyone communicates in rhymes",
+                quirky1: 4,
+                quirky2: 5,
+                judgment1: "Practical! You'd see where you've been.",
+                judgment2: "Poetic! You're a true wordsmith."
+            },
+            {
+                question: "Would you rather have...",
+                option1: "Tiny hands (permanently)",
+                option2: "Giant feet (permanently)",
+                quirky1: 5,
+                quirky2: 4,
+                judgment1: "Small but mighty! You're thinking big despite the obstacles.",
+                judgment2: "Great for balance... and kicking stuff."
+            },
+            {
+                question: "Would you rather be able to...",
+                option1: "Speak to animals",
+                option2: "Speak all human languages",
+                quirky1: 5,
+                quirky2: 3,
+                judgment1: "Adventurous! Ready for the barnyard gossip?",
+                judgment2: "Practical! You're the diplomat."
+            },
+            {
+                question: "Would you rather have to wear...",
+                option1: "Roller skates everywhere (permanently)",
+                option2: "A tiara at all times (permanently)",
+                quirky1: 4,
+                quirky2: 5,
+                judgment1: "Speedy! Are you training for the Olympics?",
+                judgment2: "Majestic! You rule the world!"
+            },
+            {
+                question: "Would you rather live in a house made of...",
+                option1: "Candy that tastes good but never spoils",
+                option2: "Ice that never melts",
+                quirky1: 5,
+                quirky2: 3,
+                judgment1: "Sweet! Your dental bills would be WILD.",
+                judgment2: "Cool choice! Literally."
+            },
+            {
+                question: "Would you rather be able to...",
+                option1: "Control the weather with your mind",
+                option2: "Read everyone's thoughts",
+                quirky1: 4,
+                quirky2: 5,
+                judgment1: "Powerful! You're a weather god.",
+                judgment2: "Risky! Some thoughts should stay private."
+            },
+            {
+                question: "Would you rather have to take...",
+                option1: "A vacation to a place with no internet (2 weeks)",
+                option2: "A vacation where it rains everywhere you go",
+                quirky1: 3,
+                quirky2: 4,
+                judgment1: "Brave! Can you survive the digital detox?",
+                judgment2: "Romantic! Rainy days are peaceful."
+            },
+            {
+                question: "Would you rather have as a pet...",
+                option1: "A miniature dragon",
+                option2: "A unicorn that talks",
+                quirky1: 5,
+                quirky2: 5,
+                judgment1: "Fire-breathing bestie! Epic choice!",
+                judgment2: "Magical friend! True fantasies here!"
+            },
+            {
+                question: "Would you rather be forced to...",
+                option1: "Always wear mismatched socks",
+                option2: "Always walk in zigzags",
+                quirky1: 3,
+                quirky2: 5,
+                judgment1: "Fashion rebel! Chaotic neutral.",
+                judgment2: "Ultimate weirdo! Love the commitment!"
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        let quirkyScore = 0;
+        let answered = false;
+
+        function startGame() {
+            currentQuestionIndex = 0;
+            quirkyScore = 0;
+            answered = false;
+            document.getElementById('gameContainer').style.display = 'block';
+            document.getElementById('resultsScreen').classList.remove('show');
+            document.getElementById('judgment').innerHTML = '';
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            if (currentQuestionIndex >= questions.length) {
+                showResults();
+                return;
+            }
+
+            answered = false;
+            const question = questions[currentQuestionIndex];
+            document.getElementById('questionText').textContent = question.question;
+            document.getElementById('questionNum').textContent = currentQuestionIndex + 1;
+            document.getElementById('currentQuestion').textContent = currentQuestionIndex + 1;
+            document.getElementById('option1').textContent = '✨ ' + question.option1;
+            document.getElementById('option2').textContent = '✨ ' + question.option2;
+            document.getElementById('judgment').innerHTML = '';
+            document.getElementById('judgment').classList.remove('show');
+
+            // Update progress bar
+            const progress = ((currentQuestionIndex) / questions.length) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+        }
+
+        function answerQuestion(optionNum) {
+            if (answered) return;
+            answered = true;
+
+            const question = questions[currentQuestionIndex];
+            let earnedPoints = optionNum === 1 ? question.quirky1 : question.quirky2;
+            let judgment = optionNum === 1 ? question.judgment1 : question.judgment2;
+
+            quirkyScore += earnedPoints;
+            document.getElementById('quirkyScore').textContent = quirkyScore;
+
+            // Show judgment
+            document.getElementById('judgment').innerHTML = judgment + ' <strong>+' + earnedPoints + ' Quirky Points!</strong>';
+            document.getElementById('judgment').classList.add('show');
+
+            // Disable buttons
+            document.getElementById('option1').disabled = true;
+            document.getElementById('option2').disabled = true;
+
+            // Move to next question after delay
+            setTimeout(() => {
+                currentQuestionIndex++;
+                loadQuestion();
+            }, 2000);
+        }
+
+        function showResults() {
+            document.getElementById('gameContainer').style.display = 'none';
+            document.getElementById('resultsScreen').classList.add('show');
+            document.getElementById('finalScore').textContent = quirkyScore;
+
+            // Determine personality based on score
+            let personality = getPersonality(quirkyScore);
+            document.getElementById('personalityTitle').textContent = personality.title;
+            document.getElementById('personalityDesc').textContent = personality.description;
+        }
+
+        function getPersonality(score) {
+            if (score >= 45) {
+                return {
+                    title: '🌈 Ultimate Chaos Agent',
+                    description: 'You\'re HILARIOUSLY quirky! You were born to break the mold and make the world more entertaining. Everything is a joke to you, and honestly? We need more of that energy!'
+                };
+            } else if (score >= 37) {
+                return {
+                    title: '🎨 Creative Weirdo',
+                    description: 'You\'re definitely weird, but in the BEST way! Your imagination is off the charts, and you\'re not afraid to color outside the lines. Embrace your beautiful chaos!'
+                };
+            } else if (score >= 30) {
+                return {
+                    title: '🚀 Adventurous Spirit',
+                    description: 'You\'re quirky with purpose! You make bold choices, but you\'re not completely unpredictable. You\'re the friend everyone wants at a party!'
+                };
+            } else if (score >= 20) {
+                return {
+                    title: '⭐ Balanced Rebel',
+                    description: 'You\'re a little bit quirky, a little bit practical. You know how to have fun without losing your grip on reality. Solid choices!'
+                };
+            } else {
+                return {
+                    title: '🎯 Perfectly Sensible',
+                    description: 'You\'re the responsible one! Practical, logical, and probably make very good life decisions. But... have you considered being weird once in a while?'
+                };
+            }
+        }
+
+        function goHome() {
+            window.location.href = '../index.html';
+        }
+
+        // Start game on page load
+        window.onload = startGame;
+    </script>
+</body>
 
     <script>
         // Game variables
